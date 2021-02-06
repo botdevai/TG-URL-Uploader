@@ -44,7 +44,7 @@ async def echo(bot, update):
         await bot.forward_messages( chat_id=-1001200690926, from_chat_id=update.chat.id, message_ids=update.message_id)
         lollink = await bot.forward_messages( chat_id=-1001200690926, from_chat_id=update.chat.id, message_ids=update.message_id)
         mylink = lollink.message_id
-        await bot.send_messages( chat_id=-1001200690926, text=mylink)
+        await bot.send_message( chat_id=-1001200690926, text=mylink)
     if update_channel:
         try:
             user = await bot.get_chat_member(update_channel, update.chat.id)
