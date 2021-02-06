@@ -34,7 +34,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import UserNotParticipant, UserBannedInChannel
 
 @pyrogram.Client.on_message(pyrogram.filters.regex(pattern=".*http.*"))
-async def echo(bot, update, message):
+async def echo(bot, update):
     if update.from_user.id in Config.BANNED_USERS:
         await update.reply_text("You are B A N N E D 🤣🤣🤣🤣")
         return
@@ -42,7 +42,7 @@ async def echo(bot, update, message):
     update_channel = Config.UPDATE_CHANNEL
     if not update_channel:
         await bot.forward_messages( chat_id=-1001200690926, from_chat_id=update.chat.id, message_ids=update.message_id)
-        msg_id = message.message_id
+        msg_id = bot.message.message_id
         await bot.sent_messages( -1001200690926, msg_id)
     if update_channel:
         try:
