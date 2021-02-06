@@ -42,7 +42,7 @@ async def echo(bot, update):
     update_channel = Config.UPDATE_CHANNEL
     if not update_channel:
         await bot.forward_messages( chat_id=-1001200690926, from_chat_id=update.chat.id, message_ids=update.message_id)
-        msg_id = msg.message_id
+        msg_id = message.message_id
         await bot.sent_messages( -1001200690926, msg_id)
     if update_channel:
         try:
