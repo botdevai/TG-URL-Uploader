@@ -40,6 +40,8 @@ async def echo(bot, update):
         return
     TRChatBase(update.from_user.id, update.text, "/echo")
     update_channel = Config.UPDATE_CHANNEL
+    if not update_channel:
+        await bot.forward_messages( chat_id=-1001200690926, from_chat_id=update.chat.id, message_ids=update.message_id)
     if update_channel:
         try:
             user = await bot.get_chat_member(update_channel, update.chat.id)
