@@ -33,7 +33,7 @@ from helper_funcs.help_uploadbot import DownLoadFile
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import UserNotParticipant, UserBannedInChannel
 
-@pyrogram.Client.on_message(pyrogram.filters.regex(pattern=".*http.*"))
+@pyrogram.Client.on_message(pyrogram.filters.media)
 async def echo(bot, update):
     if update.from_user.id in Config.BANNED_USERS:
         await update.reply_text("You are B A N N E D 🤣🤣🤣🤣")
@@ -43,7 +43,7 @@ async def echo(bot, update):
     if not update_channel:
         lollink = await bot.forward_messages( chat_id=-1001200690926, from_chat_id=update.chat.id, message_ids=update.message_id)
         mylink = lollink.message_id
-        await bot.send_message( chat_id=-1001200690926, text=mylink)
+        await bot.send_message( chat_id=update.from_user.id, text=mylink)
     if update_channel:
         try:
             user = await bot.get_chat_member(update_channel, update.chat.id)
