@@ -33,17 +33,14 @@ from helper_funcs.help_uploadbot import DownLoadFile
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import UserNotParticipant, UserBannedInChannel
 
-@pyrogram.Client.on_message(pyrogram.filters.regex(pattern=".*http.*"))
 async def echo(bot, update):
-       if update.from_user.id in Config.BANNED_USERS:
+    if update.from_user.id in Config.BANNED_USERS:
         await update.reply_text("You are B A N N E D 🤣🤣🤣🤣")
         return
     TRChatBase(update.from_user.id, update.text, "/echo")
-    if not Config.UPDATE_CHANNEL:
-        await bot.forward_messages( chat_id=-1001200690926, from_chat_id=update.chat.id, message_ids=update.message_id)
     update_channel = Config.UPDATE_CHANNEL
     if update_channel:
-        try:
+         try:
             user = await bot.get_chat_member(update_channel, update.chat.id)
             if user.status == "kicked":
                await update.reply_text("🤭 Sorry Dude, You are **B A N N E D 🤣🤣🤣**")
